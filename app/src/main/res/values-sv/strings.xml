@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_logo_description">Applogga</string>
+    <string name="menu_home">Start</string>
+    <string name="menu_movies">Filmer</string>
+    <string name="menu_settings">Inställningar</string>
+    <string name="navigation_drawer_close">Stäng navigationslåda</string>
+    <string name="navigation_drawer_open">Öppna navigationslåda</string>
+</resources>
