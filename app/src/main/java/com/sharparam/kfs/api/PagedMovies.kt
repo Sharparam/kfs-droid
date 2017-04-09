@@ -13,9 +13,9 @@ class PagedMovies private constructor(private val movies: List<Movie>, val page:
     }
 
     companion object {
-        private val DEFAULT_PAGE = 0
+        private const val DEFAULT_PAGE = 0
 
-        private val DEFAULT_PAGE_SIZE = 10
+        private const val DEFAULT_PAGE_SIZE = 10
 
         @JvmStatic fun get(page: Int = DEFAULT_PAGE, size: Int = DEFAULT_PAGE_SIZE): PagedMovies {
             val params = listOf(android.util.Pair("mode", "archive"), android.util.Pair("page", page.toString()),

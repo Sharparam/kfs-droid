@@ -23,10 +23,10 @@ data class Movie(val id: Int, val title: String, val original: String, val genre
             val format = NumberFormat.getNumberInstance()
             format.minimumFractionDigits = 1
             format.maximumFractionDigits = 1
-            return format.format(rating.toDouble())
+            return format.format(rating)
         }
 
-    val posterBitmap: Bitmap
+    val posterBitmap: Bitmap?
         get() {
             return KfsApi.getPoster(image)
         }
@@ -47,14 +47,15 @@ data class Movie(val id: Int, val title: String, val original: String, val genre
             return (0 until array.length()).asSequence().map { fromJsonObject(array.getJSONObject(it)) }.toList()
         }
 
-        @JvmStatic private fun fromJsonObject(obj: JSONObject): Movie {
-            @SuppressLint("SimpleDateFormat")
+        @JvmStatic
+        @SuppressLint("SimpleDateFormat")
+        private fun fromJsonObject(obj: JSONObject): Movie {
             val parser = SimpleDateFormat("yyyy-MM-dd")
             val date = parser.parse(obj.getString("date"))
             return Movie(obj.getInt("id"), obj.getString("title"), obj.getString("original"), obj.getString("genre"),
-                    obj.getString("country"), obj.getString("director"), obj.getInt("year"), obj.getInt("duration"),
-                    obj.getString("imdb"), obj.getString("image"), date, obj.getString("description"),
-                    obj.getDouble("rating"))
+                obj.getString("country"), obj.getString("director"), obj.getInt("year"), obj.getInt("duration"),
+                obj.getString("imdb"), obj.getString("image"), date, obj.getString("description"),
+                obj.getDouble("rating"))
         }
     }
 }
