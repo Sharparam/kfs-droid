@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">KFS</string>
     <string name="app_name_long" translatable="false">Kristinehamns Filmstudio</string>
     <string name="app_email" translatable="false">info@kristinehamns-filmstudio.se</string>
@@ -106,4 +106,14 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="card_placeholder_title">Movie title</string>
+    <string name="card_placeholder_genre">Genre</string>
+    <string name="card_placeholder_date" tools:ignore="TypographyDashes">2017-03-03</string>
+    <string name="movie_poster">Movie poster</string>
+    <string name="genre">Genre</string>
+    <string name="country">Country</string>
+    <string name="director">Director</string>
+    <string name="year">Year</string>
+    <string name="duration">Duration</string>
+    <string name="original_title">Original title</string>
 </resources>

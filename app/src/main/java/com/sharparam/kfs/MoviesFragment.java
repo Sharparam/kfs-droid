@@ -35,7 +35,7 @@ public class MoviesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_movie_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_movies, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -58,7 +58,7 @@ public class MoviesFragment extends Fragment {
                 @Override
                 protected void onPostExecute(List<Movie> movies) {
                     Log.d(TAG, "onPostExecute: Movies loaded, updating adapter");
-                    recyclerView.setAdapter(new MovieRecyclerViewAdapter(movies, listener));
+                    recyclerView.setAdapter(new MoviesAdapter(movies, listener));
                     recyclerView.invalidate();
                 }
             }).execute();

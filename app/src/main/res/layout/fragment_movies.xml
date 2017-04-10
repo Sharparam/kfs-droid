@@ -7,8 +7,6 @@
     android:name="com.sharparam.kfs.MoviesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="com.sharparam.kfs.MoviesFragment"
-    tools:listitem="@layout/fragment_movie"/>
+    tools:listitem="@layout/list_item_movie"/>

@@ -16,11 +16,11 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.ViewHolder> {
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
     private final List<Movie> items;
     private final OnListFragmentInteractionListener listener;
 
-    public MovieRecyclerViewAdapter(List<Movie> items, OnListFragmentInteractionListener listener) {
+    public MoviesAdapter(List<Movie> items, OnListFragmentInteractionListener listener) {
         this.items = items;
         this.listener = listener;
     }
@@ -28,15 +28,17 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_movie, parent, false);
+                .inflate(R.layout.list_item_movie, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.item = items.get(position);
-        holder.idView.setText(String.valueOf(items.get(position).getId()));
-        holder.contentView.setText(items.get(position).getDescription());
+        Movie movie = items.get(position);
+        holder.item = movie;
+        holder.title.setText(movie.getTitle());
+        holder.genre.setText(movie.getGenre());
+        holder.date.setText(movie.getFormattedDate());
 
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,20 +59,23 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View view;
-        public final TextView idView;
-        public final TextView contentView;
+        public final TextView title;
+        public final TextView genre;
+        public final TextView date;
+
         public Movie item;
 
         public ViewHolder(View view) {
             super(view);
             this.view = view;
-            idView = (TextView)view.findViewById(R.id.id);
-            contentView = (TextView)view.findViewById(R.id.content);
+            title = (TextView)view.findViewById(R.id.title);
+            genre = (TextView)view.findViewById(R.id.genre);
+            date = (TextView)view.findViewById(R.id.date);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + contentView.getText() + "'";
+            return super.toString() + " '" + title.getText() + "'";
         }
     }
 }
