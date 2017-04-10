@@ -11,7 +11,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_movies">Movies</string>
-    <string name="menu_settings" translatable="false">\@string/settings</string>
+    <string name="menu_settings" translatable="false">@string/settings</string>
 
     <string name="title_activity_movie">Movie</string>
     <string name="large_text" translatable="false">
@@ -103,7 +103,7 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="action_settings" translatable="false">\@string/settings</string>
+    <string name="action_settings" translatable="false">@string/settings</string>
     <string name="card_placeholder_title">Movie title</string>
     <string name="card_placeholder_genre">Genre</string>
     <string name="card_placeholder_date" tools:ignore="TypographyDashes" translatable="false">2017-03-03</string>
