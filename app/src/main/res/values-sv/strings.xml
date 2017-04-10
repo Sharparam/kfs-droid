@@ -3,7 +3,17 @@
     <string name="app_logo_description">Applogga</string>
     <string name="menu_home">Start</string>
     <string name="menu_movies">Filmer</string>
-    <string name="menu_settings">Inställningar</string>
     <string name="navigation_drawer_close">Stäng navigationslåda</string>
     <string name="navigation_drawer_open">Öppna navigationslåda</string>
+    <string name="card_placeholder_genre">Genre</string>
+    <string name="card_placeholder_title">Filmtitel</string>
+    <string name="country">Land</string>
+    <string name="director">Regissör</string>
+    <string name="duration">Längd</string>
+    <string name="genre">Genre</string>
+    <string name="movie_poster">Filmaffisch</string>
+    <string name="original_title">Originaltitel</string>
+    <string name="title_activity_movie">Film</string>
+    <string name="year">År</string>
+    <string name="settings">Inställningar</string>
 </resources>
