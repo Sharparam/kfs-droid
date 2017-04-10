@@ -33,14 +33,11 @@ data class Movie(val id: Int, val title: String, val original: String, val genre
 
     companion object {
         @JvmStatic fun findById(id: Int): Movie {
-            val params = listOf(android.util.Pair("id", id.toString()))
-            val json = KfsApi.request(params)
-            return fromJsonObject(JSONObject(json))
+            return fromJsonObject(JSONObject(KfsApi.request(Pair("id", id.toString()))))
         }
 
         @JvmStatic fun getActive(): List<Movie> {
-            val json = KfsApi.request()
-            return fromJsonArray(JSONArray(json))
+            return fromJsonArray(JSONArray(KfsApi.request()))
         }
 
         @JvmStatic fun fromJsonArray(array: JSONArray): List<Movie> {

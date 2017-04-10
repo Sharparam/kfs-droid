@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
-import android.util.Pair
 
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -21,7 +20,7 @@ object KfsApi {
     private val TAG = KfsApi::class.java.simpleName
 
     @Throws(IOException::class)
-    @JvmStatic fun request(params: List<Pair<String, String>>): String {
+    @JvmStatic fun request(vararg params: Pair<String, String>): String {
         val b = Uri.parse(ENDPOINT).buildUpon()
         for (param in params) {
             b.appendQueryParameter(param.first, param.second)

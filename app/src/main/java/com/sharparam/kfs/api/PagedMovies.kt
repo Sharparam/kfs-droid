@@ -18,9 +18,7 @@ class PagedMovies private constructor(private val movies: List<Movie>, val page:
         private const val DEFAULT_PAGE_SIZE = 10
 
         @JvmStatic fun get(page: Int = DEFAULT_PAGE, size: Int = DEFAULT_PAGE_SIZE): PagedMovies {
-            val params = listOf(android.util.Pair("mode", "archive"), android.util.Pair("page", page.toString()),
-                    android.util.Pair("size", size.toString()))
-            val json = KfsApi.request(params)
+            val json = KfsApi.request(Pair("mode", "archive"), Pair("page", page.toString()), Pair("size", size.toString()))
             return fromJson(JSONObject(json))
         }
 

@@ -1,19 +1,15 @@
 package com.sharparam.kfs.api
 
-import android.util.Pair
-
 import org.json.JSONException
 import org.json.JSONObject
-
 import java.io.IOException
-import java.util.ArrayList
 
 data class Page(val id: Int, val name: String, val title: String, val content: String,
                 val sort: Int, val isEnabled: Boolean) {
     companion object {
         @JvmStatic
         @Throws(IOException::class, JSONException::class)
-        fun findByName(name: String): Page = fromJsonObject(JSONObject(KfsApi.request(listOf(Pair("page", name)))))
+        fun findByName(name: String): Page = fromJsonObject(JSONObject(KfsApi.request(Pair("page", name))))
 
         @JvmStatic
         fun generateErrorPage(e: Throwable): Page = Page(0, "error", "Error",
