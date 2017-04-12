@@ -1,28 +1,18 @@
 package com.sharparam.kfs;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.sharparam.kfs.api.Movie;
-import com.sharparam.kfs.api.Page;
-
-import org.json.JSONException;
-
-import java.io.IOException;
-
-import us.feras.mdv.MarkdownView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MoviesFragment.OnListFragmentInteractionListener {
