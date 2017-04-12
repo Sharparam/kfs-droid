@@ -1,7 +1,5 @@
 package com.sharparam.kfs
 
-import android.graphics.Bitmap
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -9,6 +7,8 @@ import android.widget.Toast
 import com.sharparam.kfs.api.Movie
 import kotlinx.android.synthetic.main.activity_movie.*
 import kotlinx.android.synthetic.main.content_movie.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class MovieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,12 +26,10 @@ class MovieActivity : AppCompatActivity() {
             return
         }
 
-        object : AsyncTask<Int, Void, Movie>() {
-            override fun doInBackground(vararg params: Int?): Movie {
-                return Movie.findById(params[0]!!)
-            }
+        doAsync {
+            val movie = Movie.findById(id)
 
-            override fun onPostExecute(movie: Movie) {
+            uiThread {
                 toolbar_layout.title = movie.title
                 original.text = movie.original
                 genre.text = movie.genre
@@ -41,19 +39,17 @@ class MovieActivity : AppCompatActivity() {
                 duration.text = movie.duration.toString()
                 description.loadMarkdown(movie.description)
 
-                object : AsyncTask<Movie, Void, Bitmap>() {
-                    override fun doInBackground(vararg params: Movie): Bitmap {
-                        Log.d(TAG, "doInBackground: Obtaining bitmap")
-                        return params[0].posterBitmap!!
-                    }
+                doAsync {
+                    Log.d(TAG, "doInBackground: Obtaining bitmap")
+                    val bitmap = movie.posterBitmap
 
-                    override fun onPostExecute(bitmap: Bitmap) {
+                    uiThread {
                         Log.d(TAG, "onPostExecute: Bitmap obtained, setting imageview")
                         poster.setImageBitmap(bitmap)
                     }
-                }.execute(movie)
+                }
             }
-        }.execute(id)
+        }
     }
 
     companion object {

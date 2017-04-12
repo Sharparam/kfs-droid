@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.sharparam.kfs.api.Page
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.support.v4.onUiThread
+import org.jetbrains.anko.support.v4.uiThread
 
 import org.json.JSONException
 
@@ -27,21 +30,19 @@ class HomeFragment : Fragment() {
 
         val md = view.findViewById(R.id.md_home) as MarkdownView
 
-        object : AsyncTask<String, Void, Page>() {
-            override fun doInBackground(vararg params: String): Page {
-                try {
-                    return Page.findByName(params[0])
-                } catch (e: IOException) {
-                    return Page.generateErrorPage(e)
-                } catch (e: JSONException) {
-                    return Page.generateErrorPage(e)
-                }
+        doAsync {
+            val page = try {
+                Page.findByName("home")
+            } catch (e: IOException) {
+                Page.generateErrorPage(e)
+            } catch (e: JSONException) {
+                Page.generateErrorPage(e)
             }
 
-            override fun onPostExecute(page: Page) {
+            onUiThread {
                 md.loadMarkdown(page.content)
             }
-        }.execute("home")
+        }
 
         return view
     }
