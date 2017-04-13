@@ -3,6 +3,7 @@ package com.sharparam.kfs
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.sharparam.kfs.api.Movie
+import com.sharparam.kfs.api.VolleyWrapper
 import kotlinx.android.synthetic.main.activity_movie.*
 import kotlinx.android.synthetic.main.content_movie.*
 import org.jetbrains.anko.*
@@ -22,29 +23,19 @@ class MovieActivity : AppCompatActivity(), AnkoLogger {
             return
         }
 
-        doAsync {
-            val movie = Movie.findById(id)
+        VolleyWrapper.getInstance(ctx).addToRequestQueue(Movie.generateRequest(id, {
+            toolbar_layout.title = it.title
+            original.text = it.original
+            genre.text = it.genre
+            country.text = it.country
+            director.text = it.director
+            year.text = it.year.toString()
+            duration.text = it.duration.toString()
+            description.loadMarkdown(it.description)
 
-            uiThread {
-                toolbar_layout.title = movie.title
-                original.text = movie.original
-                genre.text = movie.genre
-                country.text = movie.country
-                director.text = movie.director
-                year.text = movie.year.toString()
-                duration.text = movie.duration.toString()
-                description.loadMarkdown(movie.description)
-
-                doAsync {
-                    debug("doInBackground: Obtaining bitmap")
-                    val bitmap = movie.posterBitmap
-
-                    uiThread {
-                        debug("onPostExecute: Bitmap obtained, setting imageview")
-                        poster.setImageBitmap(bitmap)
-                    }
-                }
-            }
-        }
+            poster.setImageUrl(it.posterUrl.toString(), VolleyWrapper.getInstance(ctx).imageLoader)
+        }, {
+            toast("Failed to load movie")
+        }))
     }
 }

@@ -40,6 +40,7 @@ dependencies {
     compile 'org.jetbrains.anko:anko-sdk15:0.9.1'
     compile 'org.jetbrains.anko:anko-support-v4:0.9.1'
     compile 'org.jetbrains.anko:anko-appcompat-v7:0.9.1'
+    compile 'com.android.volley:volley:1.0.0'
     testCompile 'junit:junit:4.12'
 }
 repositories {

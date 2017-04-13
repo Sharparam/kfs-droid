@@ -11,10 +11,11 @@ import android.view.ViewGroup
 import com.sharparam.kfs.MoviesFragment.OnListFragmentInteractionListener
 import com.sharparam.kfs.api.Movie
 import com.sharparam.kfs.api.PagedMovies
+import com.sharparam.kfs.api.VolleyWrapper
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.debug
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * A fragment representing a list of Items.
@@ -40,17 +41,13 @@ class MoviesFragment : Fragment(), AnkoLogger {
             val recyclerView = view
             recyclerView.layoutManager = LinearLayoutManager(context)
 
-            doAsync {
-
-                debug("doInBackground: Loading movies")
-                val movies = PagedMovies.get(0, 10).toList()
-
-                uiThread {
-                    debug("onPostExecute: Movies loaded, updating adapter")
-                    recyclerView.adapter = MoviesAdapter(movies, listener)
-                    recyclerView.invalidate()
-                }
-            }
+            debug("Loading movies")
+            VolleyWrapper.getInstance(activity).addToRequestQueue(PagedMovies.generateRequest(0, 10, {
+                recyclerView.adapter = MoviesAdapter(it.toList(), listener)
+                recyclerView.invalidate()
+            }, {
+                toast("Failed to load movies")
+            }))
         }
 
         return view
